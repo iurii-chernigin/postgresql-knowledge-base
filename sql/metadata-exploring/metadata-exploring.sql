@@ -13,7 +13,16 @@ from pg_class pc
 left join pg_namespace pn on pn.oid = pc.relnamespace
 where pn.nspname = 'store'
 
---- All shemas
+--- All views with namespace information
+select 
+	relname as name,
+	nspname as namespace
+from pg_class pc
+left join pg_namespace pn
+	on pn.oid = pc.relnamespace
+where relkind in ('v', 'm') 
+
+-- All schemas
 select *
 from pg_namespace
 
@@ -21,3 +30,10 @@ from pg_namespace
 select *
 from pg_catalog.pg_class ss
 limit 10
+
+
+
+
+
+
+
